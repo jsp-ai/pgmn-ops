@@ -1,0 +1,134 @@
+[
+  {
+    "user": "U01234567",
+    "text": ":in: Good morning team!",
+    "ts": "1704088800.000100",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234567",
+    "text": ":out: Heading home, see you tomorrow!",
+    "ts": "1704117600.000100",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234568",
+    "text": ":in: Morning everyone!",
+    "ts": "1704089100.000200",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234568",
+    "text": ":out: Done for the day!",
+    "ts": "1704121200.000200",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234569",
+    "text": ":in: Sorry I'm late, traffic was terrible!",
+    "ts": "1704092400.000300",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234569",
+    "text": ":out: Leaving now",
+    "ts": "1704124800.000300",
+    "date": "2024-01-01"
+  },
+  {
+    "user": "U01234570",
+    "text": ":in: Good morning!",
+    "ts": "1704175200.000400",
+    "date": "2024-01-02"
+  },
+  {
+    "user": "U01234570",
+    "text": ":out: Working late tonight to finish the project",
+    "ts": "1704211200.000400",
+    "date": "2024-01-02"
+  },
+  {
+    "user": "U01234571",
+    "text": ":in: Starting the day",
+    "ts": "1704175500.000500",
+    "date": "2024-01-02"
+  },
+  {
+    "user": "U01234571",
+    "text": ":out: Regular hours today",
+    "ts": "1704204000.000500",
+    "date": "2024-01-02"
+  },
+  {
+    "user": "U01234572",
+    "text": ":in: Hello team!",
+    "ts": "1704261600.000600",
+    "date": "2024-01-03"
+  },
+  {
+    "user": "U01234572",
+    "text": ":out: Finished early today",
+    "ts": "1704283200.000600",
+    "date": "2024-01-03"
+  },
+  {
+    "user": "U01234573",
+    "text": ":in: Running behind schedule, will be in shortly",
+    "ts": "1704265200.000700",
+    "date": "2024-01-03"
+  },
+  {
+    "user": "U01234573",
+    "text": ":out: Long day but productive!",
+    "ts": "1704297600.000700",
+    "date": "2024-01-03"
+  },
+  {
+    "user": "U01234574",
+    "text": ":in: Good morning everyone!",
+    "ts": "1704348000.000800",
+    "date": "2024-01-04"
+  },
+  {
+    "user": "U01234574",
+    "text": ":out: See you all tomorrow!",
+    "ts": "1704376800.000800",
+    "date": "2024-01-04"
+  },
+  {
+    "user": "U01234575",
+    "text": ":in: Starting work now",
+    "ts": "1704348300.000900",
+    "date": "2024-01-04"
+  },
+  {
+    "user": "U01234575",
+    "text": ":out: Heading out",
+    "ts": "1704380400.000900",
+    "date": "2024-01-04"
+  },
+  {
+    "user": "U01234576",
+    "text": ":in: Good morning team!",
+    "ts": "1704434400.001000",
+    "date": "2024-01-05"
+  },
+  {
+    "user": "U01234576",
+    "text": ":out: Done for the week!",
+    "ts": "1704463200.001000",
+    "date": "2024-01-05"
+  },
+  {
+    "user": "U01234567",
+    "text": ":in: Late start today, had a doctor's appointment",
+    "ts": "1704439800.001100", 
+    "date": "2024-01-05"
+  },
+  {
+    "user": "U01234567",
+    "text": ":out: Staying late to make up time",
+    "ts": "1704470400.001100",
+    "date": "2024-01-05"
+  }
+] 

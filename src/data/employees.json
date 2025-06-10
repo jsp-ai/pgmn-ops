@@ -1,0 +1,72 @@
+[
+  {
+    "id": "emp_001",
+    "slack_user_id": "U01234567",
+    "name": "John Smith",
+    "email": "john.smith@company.com",
+    "hourly_rate": 25.00
+  },
+  {
+    "id": "emp_002",
+    "slack_user_id": "U01234568",
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@company.com",
+    "hourly_rate": 30.00
+  },
+  {
+    "id": "emp_003",
+    "slack_user_id": "U01234569",
+    "name": "Michael Brown",
+    "email": "michael.brown@company.com",
+    "hourly_rate": 22.50
+  },
+  {
+    "id": "emp_004",
+    "slack_user_id": "U01234570",
+    "name": "Emily Davis",
+    "email": "emily.davis@company.com",
+    "hourly_rate": 28.00
+  },
+  {
+    "id": "emp_005",
+    "slack_user_id": "U01234571",
+    "name": "David Wilson",
+    "email": "david.wilson@company.com",
+    "hourly_rate": 26.75
+  },
+  {
+    "id": "emp_006",
+    "slack_user_id": "U01234572",
+    "name": "Lisa Martinez",
+    "email": "lisa.martinez@company.com",
+    "hourly_rate": 32.00
+  },
+  {
+    "id": "emp_007",
+    "slack_user_id": "U01234573",
+    "name": "James Taylor",
+    "email": "james.taylor@company.com",
+    "hourly_rate": 24.50
+  },
+  {
+    "id": "emp_008",
+    "slack_user_id": "U01234574",
+    "name": "Jennifer Garcia",
+    "email": "jennifer.garcia@company.com",
+    "hourly_rate": 29.25
+  },
+  {
+    "id": "emp_009",
+    "slack_user_id": "U01234575",
+    "name": "Robert Anderson",
+    "email": "robert.anderson@company.com",
+    "hourly_rate": 27.50
+  },
+  {
+    "id": "emp_010",
+    "slack_user_id": "U01234576",
+    "name": "Amanda White",
+    "email": "amanda.white@company.com",
+    "hourly_rate": 31.00
+  }
+] 
