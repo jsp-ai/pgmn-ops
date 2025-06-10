@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface DateRangePickerProps {
   startDate: string;
   endDate: string;
@@ -19,12 +17,11 @@ export function DateRangePicker({
     const now = new Date();
     return {
       year: now.getFullYear(),
-      month: now.getMonth() + 1,
       monthName: now.toLocaleString('default', { month: 'long' })
     };
   };
 
-  const { year, month, monthName } = getCurrentMonth();
+  const { year, monthName } = getCurrentMonth();
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">

@@ -71,7 +71,6 @@ export function calculatePayrollSummary(
   employees: Employee[],
   rules: PayrollRules = DEFAULT_PAYROLL_RULES
 ): PayrollSummary[] {
-  const employeeMap = new Map(employees.map(emp => [emp.id, emp]));
   const summaryMap = new Map<string, PayrollSummary>();
 
   // Initialize summaries
