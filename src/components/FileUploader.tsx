@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react';
-import { SlackMessage } from '../types';
+import { SlackMessage, Employee } from '../types';
+import { SlackTextParser } from './SlackTextParser/SlackTextParser';
 
 interface FileUploaderProps {
   onDataLoad: (messages: SlackMessage[]) => void;
+  employees: Employee[];
 }
 
-export function FileUploader({ onDataLoad }: FileUploaderProps) {
+export function FileUploader({ onDataLoad, employees }: FileUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [uploadMode, setUploadMode] = useState<'file' | 'text'>('file');
+  const [uploadMode, setUploadMode] = useState<'file' | 'text' | 'slack'>('file');
 
   const handleFileRead = (content: string) => {
     try {
@@ -143,6 +145,16 @@ export function FileUploader({ onDataLoad }: FileUploaderProps) {
           Paste JSON
         </button>
         <button
+          onClick={() => setUploadMode('slack')}
+          className={`px-4 py-2 rounded ${
+            uploadMode === 'slack' 
+              ? 'bg-purple-600 text-white' 
+              : 'bg-gray-200 text-gray-700'
+          }`}
+        >
+          Import from Slack
+        </button>
+        <button
           onClick={loadSampleData}
           className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
         >
@@ -150,7 +162,7 @@ export function FileUploader({ onDataLoad }: FileUploaderProps) {
         </button>
       </div>
 
-      {uploadMode === 'file' ? (
+      {uploadMode === 'file' && (
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
             isDragging 
@@ -180,7 +192,9 @@ export function FileUploader({ onDataLoad }: FileUploaderProps) {
             </button>
           </div>
         </div>
-      ) : (
+      )}
+
+      {uploadMode === 'text' && (
         <div className="space-y-4">
           <textarea
             ref={textAreaRef}
@@ -194,6 +208,13 @@ export function FileUploader({ onDataLoad }: FileUploaderProps) {
             Process JSON
           </button>
         </div>
+      )}
+
+      {uploadMode === 'slack' && (
+        <SlackTextParser 
+          employees={employees} 
+          onDataLoad={onDataLoad} 
+        />
       )}
     </div>
   );

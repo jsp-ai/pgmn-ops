@@ -9,14 +9,20 @@ describe('Payroll Calculator', () => {
       slack_user_id: 'U01234567',
       name: 'John Smith',
       email: 'john@company.com',
-      hourly_rate: 25.00
+      hourly_rate: 25.00,
+      status: 'active',
+      created_at: '2024-01-01T00:00:00.000Z',
+      updated_at: '2024-01-01T00:00:00.000Z'
     },
     {
       id: 'emp_002',
       slack_user_id: 'U01234568',
       name: 'Jane Doe',
       email: 'jane@company.com',
-      hourly_rate: 30.00
+      hourly_rate: 30.00,
+      status: 'active',
+      created_at: '2024-01-01T00:00:00.000Z',
+      updated_at: '2024-01-01T00:00:00.000Z'
     }
   ];
 

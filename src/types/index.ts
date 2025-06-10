@@ -4,6 +4,10 @@ export interface Employee {
   name: string;
   email: string;
   hourly_rate: number;
+  status: 'active' | 'inactive';
+  created_at: string;
+  updated_at: string;
+  notes?: string;
 }
 
 export interface SlackMessage {
@@ -54,4 +58,82 @@ export interface PayrollRules {
   late_grace_period_minutes: number;
   late_deduction_amount: number;
   offline_deduction_amount: number;
+}
+
+export interface StaffManagementState {
+  employees: Employee[];
+  isLoading: boolean;
+  error: string | null;
+  searchTerm: string;
+  sortBy: keyof Employee;
+  sortDirection: 'asc' | 'desc';
+}
+
+export interface ValidationResult {
+  isValid: boolean;
+  errors: Record<string, string>;
+}
+
+export interface EmployeeFormData {
+  name: string;
+  email: string;
+  slack_user_id: string;
+  hourly_rate: string;
+  notes: string;
+}
+
+// Slack Text Parser Types
+export type AttendanceStatus = 
+  | 'check_in'
+  | 'approved_out' 
+  | 'work_from_home'
+  | 'eta_delayed'
+  | 'no_show'
+  | 'unknown';
+
+export interface ParsedAttendanceEntry {
+  raw_name: string;
+  employee_id?: string;
+  check_in_time?: string;
+  status: AttendanceStatus;
+  is_late: boolean;
+  minutes_late: number;
+  confidence_score: number; // 0-1 for name matching
+  day_rate_applicable: boolean;
+  deduction_amount: number;
+  deduction_reason?: string;
+  eta_time?: string; // For ETA messages
+  approval_code?: string; // For approved absences
+}
+
+export interface AttendanceParseResult {
+  date: string;
+  entries: ParsedAttendanceEntry[];
+  unmatched_names: string[];
+  parsing_errors: string[];
+  no_show_employees: string[]; // Employees expected but not found
+  summary: {
+    total_entries: number;
+    check_ins: number;
+    approved_absences: number;
+    work_from_home: number;
+    late_arrivals: number;
+    no_shows: number;
+    unmatched: number;
+    total_deductions: number;
+  };
+}
+
+export interface AttendanceSettings {
+  default_start_time: string; // "10:00 AM"
+  timezone: string; // "Asia/Manila"
+  grace_period_minutes: number; // 5
+  late_penalty_per_minute: number; // 0
+}
+
+// Enhanced Employee with start time overrides
+export interface EmployeeWithSettings extends Employee {
+  start_time?: string; // Override default start time
+  timezone?: string; // Employee-specific timezone
+  grace_period_minutes?: number; // Individual grace period
 } 

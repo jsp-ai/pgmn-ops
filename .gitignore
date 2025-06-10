@@ -47,3 +47,5 @@ temp/
 
 # Vite
 vite.config.ts.timestamp-* 
+.vercel
+nodejs.pkg
