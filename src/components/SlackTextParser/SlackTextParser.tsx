@@ -101,6 +101,7 @@ in`;
     return (
       <ParsePreview
         result={parseResult}
+        employees={employees}
         onConfirm={handleConfirmImport}
         onCancel={handleCancel}
         isLoading={isLoading}
