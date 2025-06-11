@@ -23,6 +23,11 @@ export function StaffManagement() {
   const [sortBy, setSortBy] = useState<keyof Employee>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   
+  // Filter state
+  const [filters, setFilters] = useState({
+    status: 'all' as 'all' | 'active' | 'inactive'
+  });
+  
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
@@ -50,10 +55,36 @@ export function StaffManagement() {
 
   // Filter and sort employees whenever data changes
   useEffect(() => {
-    let filtered = filterEmployees(employees, searchTerm);
+    let filtered = applyFilters(employees, searchTerm, filters);
     filtered = sortEmployees(filtered, sortBy, sortDirection);
     setFilteredEmployees(filtered);
-  }, [employees, searchTerm, sortBy, sortDirection]);
+  }, [employees, searchTerm, filters, sortBy, sortDirection]);
+
+  // Apply all filters (search + advanced filters)
+  const applyFilters = (
+    employeeList: Employee[], 
+    search: string, 
+    filterOptions: typeof filters
+  ): Employee[] => {
+    let result = filterEmployees(employeeList, search);
+    
+    // Status filter
+    if (filterOptions.status !== 'all') {
+      result = result.filter(emp => emp.status === filterOptions.status);
+    }
+    
+    return result;
+  };
+
+  // Get unique departments and positions for filter dropdowns
+  const getAvailableFilters = () => {
+    // For now, return empty arrays since Employee type doesn't have these fields
+    // This can be extended when department/position fields are added to Employee type
+    return { 
+      departments: [] as string[], 
+      positions: [] as string[] 
+    };
+  };
 
   const migrateStaticData = (): Employee[] => {
     // Convert static employees.json to new format
@@ -121,6 +152,10 @@ export function StaffManagement() {
     setSearchTerm(term);
   };
 
+  const handleFilterChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+  };
+
   const handleSort = (column: keyof Employee) => {
     if (sortBy === column) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -142,6 +177,7 @@ export function StaffManagement() {
   }
 
   const activeEmployees = getActiveEmployees(employees);
+  const availableFilters = getAvailableFilters();
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -184,11 +220,13 @@ export function StaffManagement() {
           inactiveEmployees={employees.length - activeEmployees.length}
         />
 
-        {/* Search */}
+        {/* Search and Filter */}
         <StaffSearch 
           searchTerm={searchTerm}
           onSearch={handleSearch}
           totalResults={filteredEmployees.length}
+          filters={filters}
+          onFilterChange={handleFilterChange}
         />
 
         {/* Employee Table */}

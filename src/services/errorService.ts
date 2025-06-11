@@ -18,7 +18,7 @@ type ErrorHandler = (error: AppError) => void;
 class ErrorService {
   private static instance: ErrorService;
   private handlers: ErrorHandler[] = [];
-  private errors: AppError[] = [];
+  protected errors: AppError[] = [];
 
   static getInstance(): ErrorService {
     if (!ErrorService.instance) {
@@ -142,4 +142,80 @@ class ErrorService {
   }
 }
 
-export const errorService = ErrorService.getInstance(); 
+// Add error persistence functionality
+export const ERROR_STORAGE_KEY = 'pgmn-ops-error-logs';
+
+// Enhanced error service with persistence
+class PersistentErrorService extends ErrorService {
+  private persistErrors(): void {
+    try {
+      const errorData = {
+        errors: this.getErrors().map(error => ({
+          ...error,
+          timestamp: error.timestamp.toISOString() // Serialize date
+        })),
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem(ERROR_STORAGE_KEY, JSON.stringify(errorData));
+    } catch (error) {
+      console.warn('Failed to persist errors:', error);
+    }
+  }
+
+  private loadPersistedErrors(): void {
+    try {
+      const stored = localStorage.getItem(ERROR_STORAGE_KEY);
+      if (stored) {
+        const errorData = JSON.parse(stored);
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          // Restore errors with proper Date objects
+          const restoredErrors = errorData.errors.map((error: any) => ({
+            ...error,
+            timestamp: new Date(error.timestamp)
+          }));
+          this.errors = restoredErrors.slice(-50); // Keep last 50
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load persisted errors:', error);
+    }
+  }
+
+  handleError(
+    error: Error | string,
+    context?: string,
+    severity: AppError['severity'] = 'error',
+    code?: string
+  ): AppError {
+    const appError = super.handleError(error, context, severity, code);
+    this.persistErrors(); // Persist after each error
+    return appError;
+  }
+
+  clearError(id: string): void {
+    super.clearError(id);
+    this.persistErrors();
+  }
+
+  clearAllErrors(): void {
+    super.clearAllErrors();
+    this.persistErrors();
+    localStorage.removeItem(ERROR_STORAGE_KEY);
+  }
+
+  // New method to find error by ID
+  findErrorById(id: string): AppError | undefined {
+    return this.getErrors().find(error => error.id === id);
+  }
+
+  // Initialize persistence
+  init(): void {
+    this.loadPersistedErrors();
+  }
+}
+
+// Create and export the enhanced error service
+const persistentErrorService = new PersistentErrorService();
+persistentErrorService.init();
+
+export const errorService = persistentErrorService; 

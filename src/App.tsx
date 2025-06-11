@@ -6,10 +6,11 @@ import { PayrollTable } from './components/PayrollTable';
 import { StaffManagement } from './components/StaffManagement/StaffManagement';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AIStatusIndicator } from './components/AIStatusIndicator';
+import { ErrorInvestigator } from './components/ErrorInvestigator';
 import { useEmployees } from './hooks/useEmployees';
 import { usePayroll } from './hooks/usePayroll';
 
-type Page = 'payroll' | 'staff';
+type Page = 'payroll' | 'staff' | 'errors';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('payroll');
@@ -146,6 +147,14 @@ function App() {
     </ErrorBoundary>
   );
 
+  const renderErrorPage = () => (
+    <ErrorBoundary>
+      <div className="container mx-auto px-4 py-8">
+        <ErrorInvestigator errorId="390c02b5-2633-4826-b7cd-20343b85a73c" />
+      </div>
+    </ErrorBoundary>
+  );
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-gray-100">
@@ -153,7 +162,9 @@ function App() {
         <NavBar currentPage={currentPage} onPageChange={setCurrentPage} />
         
         {/* Page Content */}
-        {currentPage === 'staff' ? renderStaffPage() : renderPayrollPage()}
+        {currentPage === 'staff' ? renderStaffPage() : 
+         currentPage === 'errors' ? renderErrorPage() : 
+         renderPayrollPage()}
         
         {/* Loading Overlay */}
         {(employees.isLoading || payroll.isLoading) && (
